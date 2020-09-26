@@ -20,21 +20,6 @@ local configFile = io.open("./config.json")
 local config = JSON.parse(configFile:read("*a"))
 configFile:close()
 
-local function code(str)
-    return string.format('`%s`', str)
-end
-
-local function exec(arg, msg)
-    if not arg then return end -- make sure arg exists
-    if msg.author ~= msg.client.owner then return end -- restrict to owner only
-    
-    local fn, syntaxError = load(arg) -- load the code
-    if not fn then return msg:reply(code(syntaxError)) end -- handle syntax errors
-
-    local success, runtimeError = pcall(fn) -- run the code
-    if not success then return msg:reply(code(runtimeError)) end -- handle runtime errors
-end
-
 
 client:on('ready', function()
     print('Logged in as '.. client.user.username)
