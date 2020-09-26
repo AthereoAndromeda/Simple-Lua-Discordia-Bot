@@ -6,7 +6,7 @@ return {
     cooldown = 0,
     guildOnly = false,
     args = false,
-    role = nil,
+    roles = nil,
     execute = function(message, args)
         local JSON = require("json")
         local http = require("coro-http")
