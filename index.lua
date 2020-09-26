@@ -23,10 +23,10 @@ configFile:close()
 
 client:on('ready', function()
     print('Logged in as '.. client.user.username)
-    -- client:getChannel('712270618460160070'):send("Are ya coding son?")
+    -- client:getChannel('channel-id'):send("Are ya coding son?")
     -- timer.setInterval(10 *1000, function()
     --     coroutine.wrap(function()
-    --         client:getChannel('712270618460160070'):send("I'm still alive.")
+    --         client:getChannel('channel-id'):send("I'm still alive.")
     --     end)()
     -- end)
     -- client.user
