@@ -39,8 +39,8 @@ client:on('messageCreate', function(message)
     -- if message.author.id == client.owner then return message:reply("oof") end
 
     --* This is just cringe 
-    local messageParser = string.split(string.trim(message.content:lower()), " ")
-    local commandTable = string.split(messageParser[1]) 
+    local messageParser = string.split(string.trim(message.content), " ")
+    local commandTable = string.split(messageParser[1]:lower()) 
     local commandParser = table.slice(commandTable, #config.Prefix + 1)
     local argsTable = table.slice(messageParser, 2)
     local commandName = string.trim(table.concat(commandParser))
