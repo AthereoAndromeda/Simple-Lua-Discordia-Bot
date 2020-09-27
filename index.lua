@@ -6,8 +6,23 @@ local fs = require("fs")
 local timer = require("timer")
 Discordia.extensions()
 
+-- @FGRibreau - Francois-Guillaume Ribreau
+-- @Redsmin - A full-feature client for Redis http://redsmin.com
+-- Credits for table.filter function
+table.filter = function(t, filterIter)
+    local out = {}
+  
+    for k, v in pairs(t) do
+      if filterIter(v, k, t) then table.insert(out, v) end
+    end
+  
+    return out
+end
 
-local commandFiles = fs.readdirSync("./commands")
+local commandFiles = table.filter(fs.readdirSync("./commands"), function(files)
+    return string.endswith(files, ".lua")
+end)
+
 client["_commands"] = {}
 local commandList = client["_commands"]
 
@@ -20,13 +35,28 @@ local configFile = io.open("./config.json")
 local config = JSON.parse(configFile:read("*a"))
 configFile:close()
 
+-- local function code(str)
+--     return string.format('`%s`', str)
+-- end
+
+-- local function exec(arg, msg)
+--     if not arg then return end -- make sure arg exists
+--     if msg.author ~= msg.client.owner then return end -- restrict to owner only
+    
+--     local fn, syntaxError = load(arg) -- load the code
+--     if not fn then return msg:reply(code(syntaxError)) end -- handle syntax errors
+
+--     local success, runtimeError = pcall(fn) -- run the code
+--     if not success then return msg:reply(code(runtimeError)) end -- handle runtime errors
+-- end
+
 
 client:on('ready', function()
     print('Logged in as '.. client.user.username)
-    -- client:getChannel('channel-id'):send("Are ya coding son?")
+    -- client:getChannel('712270618460160070'):send("Are ya coding son?")
     -- timer.setInterval(10 *1000, function()
     --     coroutine.wrap(function()
-    --         client:getChannel('channel-id'):send("I'm still alive.")
+    --         client:getChannel('712270618460160070'):send("I'm still alive.")
     --     end)()
     -- end)
     -- client.user
