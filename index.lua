@@ -11,11 +11,9 @@ Discordia.extensions()
 -- Credits for table.filter function
 table.filter = function(t, filterIter)
     local out = {}
-  
     for k, v in ipairs(t) do
       if filterIter(v, k, t) then table.insert(out, v) end
     end
-  
     return out
 end
 
