@@ -12,7 +12,7 @@ Discordia.extensions()
 table.filter = function(t, filterIter)
     local out = {}
   
-    for k, v in pairs(t) do
+    for k, v in ipairs(t) do
       if filterIter(v, k, t) then table.insert(out, v) end
     end
   
