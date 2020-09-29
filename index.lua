@@ -17,8 +17,8 @@ table.filter = function(t, filterIter)
     return out
 end
 
-local commandFiles = table.filter(fs.readdirSync("./commands"), function(files)
-    return string.endswith(files, ".lua")
+local commandFiles = table.filter(fs.readdirSync("./commands"), function(file)
+    return string.endswith(file, ".lua")
 end)
 
 client["_commands"] = {}
@@ -79,11 +79,11 @@ client:on('messageCreate', function(message)
 
     --* I have no idea how else to get commands via their aliases.
     local function findAlias()
-        for key, _ in pairs(commandList) do
-            if commandList[key].aliases then
-                local alias = table.search(commandList[key].aliases, commandName)
+        for cmd, _ in pairs(commandList) do
+            if commandList[cmd].aliases then
+                local alias = table.search(commandList[cmd].aliases, commandName)
                 if alias then
-                    return commandList[key]
+                    return commandList[cmd]
                 end
             end
         end
