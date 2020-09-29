@@ -7,12 +7,10 @@ return {
         local http = require("coro-http")
 
         local status, err = pcall(function()
-            coroutine.wrap(function()
-                local link = "https://dog.ceo/api/breeds/image/random"
-                local response, body = http.request("GET", link)
-                local file = JSON.parse(body)
-                message.channel:send(file.message);
-            end)()
+            local link = "https://dog.ceo/api/breeds/image/random"
+            local response, body = http.request("GET", link)
+            local file = JSON.parse(body)
+            message.channel:send(file.message);
         end)
 
         if not status then
