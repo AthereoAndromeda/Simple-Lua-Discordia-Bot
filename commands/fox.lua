@@ -1,17 +1,15 @@
 return {
     name = "fox",
     description = "CUTE FOX PICSSSS",
-    execute = function (message, args)
+    execute = function(message, args)
         local JSON = require("json")
         local http = require("coro-http")
 
         local status, err = pcall(function()
-            coroutine.wrap(function()
-                local link = "https://randomfox.ca/floof/?ref=apilist.fun"
-                local response, body = http.request("GET", link)
-                local file = JSON.parse(body)
-                return message.channel:send(file.image)    
-            end)()
+            local link = "https://randomfox.ca/floof/?ref=apilist.fun"
+            local res, body = http.request("GET", link)
+            local file = JSON.parse(body)
+            return message.channel:send(file.image)    
         end)
 
         if not status then
