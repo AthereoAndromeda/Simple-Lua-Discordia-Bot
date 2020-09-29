@@ -13,27 +13,22 @@ return {
         local querystring = require("querystring")
 
         local status, err = pcall(function()
-            coroutine.wrap(function()
-                local link = "https://jsonplaceholder.typicode.com/posts"
-                local options = {
-                    headers = {
-                        {"Accept", "application/json"},
-                        {"Content-type", "application/json"}
-                    },
-                    body = JSON.stringify({
-                        title = "Lol",
-                        number = 102,
-                        what = true
-                    })
-                }
+            local link = "https://jsonplaceholder.typicode.com/posts"
+            local options = {
+                headers = {
+                    {"Accept", "application/json"},
+                    {"Content-type", "application/json"}
+                },
+                body = JSON.stringify({
+                    title = "Lol",
+                    number = 102,
+                    what = true
+                })
+            }
 
-                local res, body = http.request("POST", link, options.headers, options.body)
-                local file = JSON.parse(body)
-                p(file)
-
-
-
-            end)()
+            local res, body = http.request("POST", link, options.headers, options.body)
+            local file = JSON.parse(body)
+            p(file)
         end)
 
         if not status then
